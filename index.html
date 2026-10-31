@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material Design 3 设计语言指南</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+        /* CSS Design Tokens - 基于 Material Design 3 规范 */
+        :root {
+            /* 亮色模式色彩角色 */
+            --md-sys-color-primary: #6750A4;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #EADDFF;
+            --md-sys-color-on-primary-container: #21005D;
+            --md-sys-color-secondary: #625B71;
+            --md-sys-color-secondary-container: #E8DEF8;
+            --md-sys-color-on-secondary-container: #1D192B;
+            --md-sys-color-tertiary: #7D5260;
+            --md-sys-color-tertiary-container: #FFD8E4;
+            --md-sys-color-on-tertiary-container: #31111D;
+            --md-sys-color-surface: #FEF7FF;
+            --md-sys-color-on-surface: #1D1B20;
+            --md-sys-color-surface-container: #F3EDF7;
+            --md-sys-color-surface-container-high: #ECE6F0;
+            --md-sys-color-outline: #79747E;
+            --md-sys-color-outline-variant: #CAC4D0;
+
+            /* 圆角令牌 */
+            --md-sys-shape-corner-small: 8px;
+            --md-sys-shape-corner-medium: 12px;
+            --md-sys-shape-corner-large: 16px;
+            --md-sys-shape-corner-extra-large: 28px;
+            --md-sys-shape-corner-full: 9999px;
+
+            /* 阴影令牌 (Elevation) */
+            --md-sys-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+            --md-sys-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+
+            --md-sys-motion-duration: 0.25s;
+            --md-sys-motion-easing: cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        /* 暗色模式色彩角色 */
+        body.dark-mode {
+            --md-sys-color-primary: #D0BCFF;
+            --md-sys-color-on-primary: #381E72;
+            --md-sys-color-primary-container: #4F378B;
+            --md-sys-color-on-primary-container: #EADDFF;
+            --md-sys-color-secondary: #CCC2DC;
+            --md-sys-color-secondary-container: #4A4458;
+            --md-sys-color-on-secondary-container: #E8DEF8;
+            --md-sys-color-tertiary: #EFB8C8;
+            --md-sys-color-tertiary-container: #633B48;
+            --md-sys-color-on-tertiary-container: #FFD8E4;
+            --md-sys-color-surface: #141218;
+            --md-sys-color-on-surface: #E6E0E9;
+            --md-sys-color-surface-container: #211F26;
+            --md-sys-color-surface-container-high: #2B2930;
+            --md-sys-color-outline: #938F99;
+            --md-sys-color-outline-variant: #49454F;
+            --md-sys-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.5), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+            --md-sys-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.5), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            line-height: 1.6;
+            transition: background-color var(--md-sys-motion-duration) var(--md-sys-motion-easing),
+                        color var(--md-sys-motion-duration) var(--md-sys-motion-easing);
+        }
+
+        /* 顶部导航栏 App Bar */
+        .app-bar {
+            position: sticky;
+            top: 0;
+            background-color: var(--md-sys-color-surface-container);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+            box-shadow: var(--md-sys-elevation-1);
+            z-index: 100;
+        }
+
+        .app-bar-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        /* 按钮与图标按钮 */
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: var(--md-sys-shape-corner-full);
+            color: var(--md-sys-color-on-surface);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .icon-btn:hover {
+            background-color: rgba(121, 116, 126, 0.12);
+        }
+
+        /* Hero 主视口区域 */
+        .hero {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .hero-card {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            padding: 48px 24px;
+            border-radius: var(--md-sys-shape-corner-extra-large);
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto 24px auto;
+            opacity: 0.9;
+        }
+
+        /* 按钮组件 */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: var(--md-sys-shape-corner-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--md-sys-motion-duration) var(--md-sys-motion-easing);
+        }
+
+        .btn-primary {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .btn-primary:hover {
+            box-shadow: var(--md-sys-elevation-1);
+            filter: brightness(1.05);
+        }
+
+        .btn-outlined {
+            background-color: transparent;
+            color: var(--md-sys-color-primary);
+            border: 1px solid var(--md-sys-color-outline);
+        }
+
+        .btn-outlined:hover {
+            background-color: rgba(103, 80, 164, 0.08);
+        }
+
+        /* 主要内容网格 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        /* Material 卡片 */
+        .card {
+            background-color: var(--md-sys-color-surface-container-high);
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 24px;
+            box-shadow: var(--md-sys-elevation-1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--md-sys-elevation-2);
+        }
+
+        .card-outlined {
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            box-shadow: none;
+        }
+
+        .card-icon {
+            font-size: 36px;
+            color: var(--md-sys-color-primary);
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--md-sys-color-on-surface);
+            opacity: 0.85;
+        }
+
+        /* 标签 Chips */
+        .chips-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: var(--md-sys-shape-corner-small);
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* 演示区 Demo Showcase */
+        .demo-box {
+            background-color: var(--md-sys-color-surface-container);
+            border-radius: var(--md-sys-shape-corner-extra-large);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .demo-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* 页脚 Footer */
+        footer {
+            background-color: var(--md-sys-color-surface-container);
+            text-align: center;
+            padding: 32px 24px;
+            border-top: 1px solid var(--md-sys-color-outline-variant);
+            font-size: 0.875rem;
+            color: var(--md-sys-color-outline);
+        }
+
+        /* 水波纹效果 */
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="app-bar">
+        <div class="app-bar-title">
+            <span class="material-symbols-outlined">palette</span>
+            <span>Material Design 3</span>
+        </div>
+        <button class="icon-btn" id="theme-toggle" title="切换深色/浅色主题">
+            <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
+        </button>
+    </header>
+
+    <section class="hero">
+        <div class="hero-card">
+            <h1>构建适应性强的触控体验</h1>
+            <p>Material Design 是由 Google 开发的开源设计系统。最新的 Material 3 引入了动态色彩、增强的无障碍设计以及跨多端设备的自适应布局框架。</p>
+            <div style="display: flex; justify-content: center; gap: 16px;">
+                <button class="btn btn-primary" onclick="alert('欢迎探索 Material Design 规范！')">
+                    <span class="material-symbols-outlined">rocket_launch</span>
+                    开始探索
+                </button>
+                <a href="https://m3.material.io" target="_blank" style="text-decoration: none;">
+                    <button class="btn btn-outlined">
+                        <span class="material-symbols-outlined">open_in_new</span>
+                        官方规范
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            三大核心设计原则
+        </h2>
+        <div class="grid">
+            <div class="card">
+                <span class="material-symbols-outlined card-icon">layers</span>
+                <h3>1. 材质即隐喻 (Material is a metaphor)</h3>
+                <p>Material 受物理世界与光影材质的启发。界面通过层级（Elevation）、卡片叠加与阴影表现空间深度，让触控交互符合直觉。</p>
+            </div>
+            <div class="card">
+                <span class="material-symbols-outlined card-icon">draw</span>
+                <h3>2. 鲜明、形象、有针对性</h3>
+                <p>汲取平面印刷设计的精华，采用规范的排版网格、有意的留白以及高对比度的色彩层级，快速引导用户的视线焦点。</p>
+            </div>
+            <div class="card">
+                <span class="material-symbols-outlined card-icon">motion_photos_on</span>
+                <h3>3. 动效传递意义 (Motion provides meaning)</h3>
+                <p>动效不仅仅是装饰，它遵循物理运动规律。平滑的动画能够为用户操作提供即时反馈，并维持界面转场时的连贯性。</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">
+            <span class="material-symbols-outlined">dataset</span>
+            Material 3 (M3) 关键进化
+        </h2>
+        <div class="grid">
+            <div class="card card-outlined">
+                <h3>动态色彩 (Dynamic Color)</h3>
+                <p>系统可从用户壁纸中提取主色，通过算法自动生成调和且高对比度的个性化色板。</p>
+                <div class="chips-group">
+                    <span class="chip">Primary</span>
+                    <span class="chip">Secondary</span>
+                    <span class="chip">Tertiary</span>
+                </div>
+            </div>
+            <div class="card card-outlined">
+                <h3>设计令牌 (Design Tokens)</h3>
+                <p>将色彩、字号、边框弧度等统一定义为 Token，实现 Android、iOS、Web 与 Flutter 的全平台样式同步。</p>
+                <div class="chips-group">
+                    <span class="chip">Shape</span>
+                    <span class="chip">Typography</span>
+                    <span class="chip">Color Roles</span>
+                </div>
+            </div>
+            <div class="card card-outlined">
+                <h3>适应性布局 (Adaptive Layouts)</h3>
+                <p>针对手机、折叠屏、平板及桌面端设计，组件可根据屏幕宽度自由伸缩与布局重构。</p>
+                <div class="chips-group">
+                    <span class="chip">Mobile</span>
+                    <span class="chip">Tablet</span>
+                    <span class="chip">Desktop</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">
+            <span class="material-symbols-outlined">widgets</span>
+            标准组件演示
+        </h2>
+        <div class="demo-box">
+            <div>
+                <h4 style="margin-bottom: 12px; font-weight: 500;">按钮类型 (Buttons)</h4>
+                <div class="demo-row">
+                    <button class="btn btn-primary">Filled Button</button>
+                    <button class="btn btn-outlined">Outlined Button</button>
+                    <button class="btn" style="background-color: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container);">
+                        <span class="material-symbols-outlined">favorite</span>
+                        Tertiary Container
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <h4 style="margin-bottom: 12px; font-weight: 500;">标签组件 (Chips)</h4>
+                <div class="demo-row">
+                    <span class="chip">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">check</span>
+                        已选择
+                    </span>
+                    <span class="chip">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">schedule</span>
+                        待办事项
+                    </span>
+                    <span class="chip">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">label</span>
+                        Material 3
+                    </span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>基于 Google Material Design 3 规范构建 &copy; 2026 Material Design 静态演示网页</p>
+    </footer>
+
+    <script>
+        // 暗色 / 亮色主题切换逻辑
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            themeIcon.textContent = isDarkMode ? 'light_mode' : 'dark_mode';
+        });
+
+        // 按钮水波纹 (Ripple) 效果
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                const circle = document.createElement('span');
+                const diameter = Math.max(button.clientWidth, button.clientHeight);
+                const radius = diameter / 2;
+
+                const rect = button.getBoundingClientRect();
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${e.clientX - rect.left - radius}px`;
+                circle.style.top = `${e.clientY - rect.top - radius}px`;
+                circle.classList.add('ripple');
+
+                const ripple = button.getElementsByClassName('ripple')[0];
+                if (ripple) {
+                    ripple.remove();
+                }
+
+                button.appendChild(circle);
+            });
+        });
+    </script>
+</body>
+</html>
